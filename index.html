@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kişisel Portfolyo | Suat Alper Çinsar</title>
+    <link rel="icon" type="image/png" href="logo.png" />
+    <!-- <title>Kişisel Portfolyo | Suat Alper Çinsar</title> -->
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- AOS Animation Library CSS -->
@@ -107,6 +108,72 @@
       ::-webkit-scrollbar-thumb:hover {
         background: #1d4ed8;
       }
+
+      .snowflake {
+        color: #fff;
+        position: fixed;
+        top: -10%;
+        z-index: 9999;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        cursor: default;
+        -webkit-animation-name: snowflakes-fall, snowflakes-shake;
+        -webkit-animation-duration: 10s, 3s;
+        -webkit-animation-timing-function: linear, ease-in-out;
+        -webkit-animation-iteration-count: infinite, infinite;
+        -webkit-animation-play-state: running, running;
+        animation-name: snowflakes-fall, snowflakes-shake;
+        animation-duration: 10s, 3s;
+        animation-timing-function: linear, ease-in-out;
+        animation-iteration-count: infinite, infinite;
+        animation-play-state: running, running;
+      }
+      .snowflake:before {
+        content: "❆";
+      }
+      @-webkit-keyframes snowflakes-fall {
+        0% {
+          top: -10%;
+        }
+        100% {
+          top: 100%;
+        }
+      }
+      @-webkit-keyframes snowflakes-shake {
+        0% {
+          -webkit-transform: translateX(0px);
+          transform: translateX(0px);
+        }
+        50% {
+          -webkit-transform: translateX(80px);
+          transform: translateX(80px);
+        }
+        100% {
+          -webkit-transform: translateX(0px);
+          transform: translateX(0px);
+        }
+      }
+      @keyframes snowflakes-fall {
+        0% {
+          top: -10%;
+        }
+        100% {
+          top: 100%;
+        }
+      }
+      @keyframes snowflakes-shake {
+        0% {
+          transform: translateX(0px);
+        }
+        50% {
+          transform: translateX(80px);
+        }
+        100% {
+          transform: translateX(0px);
+        }
+      }
     </style>
   </head>
   <body
@@ -157,14 +224,14 @@
               >Ana Sayfa</a
             >
             <a
-              href="#about"
-              class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary transition-colors hover:scale-105 transform duration-200"
-              >Hakkımda</a
-            >
-            <a
               href="#skills"
               class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary transition-colors hover:scale-105 transform duration-200"
               >Yetenekler</a
+            >
+            <a
+              href="#contact"
+              class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary transition-colors hover:scale-105 transform duration-200"
+              >İletişim</a
             >
 
             <!-- Tema Değiştirme Butonu (Desktop) -->
@@ -176,6 +243,14 @@
               <i
                 class="fa-solid fa-sun hidden dark:inline text-lg text-amber-400"
               ></i>
+            </button>
+
+            <!-- Let it Snow Button -->
+            <button
+              id="snow-btn"
+              class="p-2 rounded-full text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 transition-all focus:outline-none hover:rotate-12 transform duration-300"
+            >
+              <i class="fa-solid fa-snowflake text-lg"></i>
             </button>
 
             <a
@@ -220,14 +295,14 @@
             >Ana Sayfa</a
           >
           <a
-            href="#about"
-            class="block px-3 py-3 rounded-lg text-base font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-primary transition-colors"
-            >Hakkımda</a
-          >
-          <a
             href="#skills"
             class="block px-3 py-3 rounded-lg text-base font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-primary transition-colors"
             >Yetenekler</a
+          >
+          <a
+            href="#contact"
+            class="block px-3 py-3 rounded-lg text-base font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-primary transition-colors"
+            >İletişim</a
           >
           <a
             href="#contact"
@@ -361,62 +436,9 @@
 
             <!-- Editör İçeriği -->
             <div
+              id="code-editor"
               class="p-6 md:p-8 font-mono text-sm md:text-base text-slate-300 leading-relaxed"
-            >
-              <div class="mb-4">
-                <span class="text-purple-400">#include</span>
-                <span class="text-green-400">&lt;stdio.h&gt;</span>
-              </div>
-
-              <div>
-                <span class="text-purple-400">int</span>
-                <span class="text-blue-400">main</span>() {
-              </div>
-
-              <div
-                class="pl-4 sm:pl-6 border-l border-slate-700/50 my-1 group-hover:border-slate-600 transition-colors"
-              >
-                <span class="text-slate-500 italic"
-                  >// Geleceği kodluyorum...</span
-                ><br />
-                <span class="text-purple-400">char</span> *hedef =
-                <span class="text-green-400">"Full Stack Developer"</span
-                >;<br />
-                <span class="text-purple-400">int</span> motivasyon =
-                <span class="text-amber-400">100</span>;
-              </div>
-
-              <div
-                class="pl-4 sm:pl-6 border-l border-slate-700/50 my-1 group-hover:border-slate-600 transition-colors"
-              >
-                <span class="text-blue-400">while</span> (motivasyon >
-                <span class="text-amber-400">0</span>) {
-                <div class="pl-4">
-                  <span class="text-blue-400">learn</span>(<span
-                    class="text-green-400"
-                    >"Yeni Teknolojiler"</span
-                  >);<br />
-                  <span class="text-blue-400">build</span>(<span
-                    class="text-green-400"
-                    >"Projeler"</span
-                  >);
-                </div>
-                }
-              </div>
-
-              <div
-                class="pl-4 sm:pl-6 border-l border-slate-700/50 mt-1 group-hover:border-slate-600 transition-colors"
-              >
-                <span class="text-purple-400">return</span>
-                <span class="text-amber-400">0</span>;
-              </div>
-              <div>}</div>
-
-              <!-- Yanıp sönen imleç -->
-              <div
-                class="mt-2 w-2.5 h-5 bg-blue-500 animate-pulse inline-block align-middle"
-              ></div>
-            </div>
+            ></div>
 
             <!-- Yüzen Rozet -->
             <div
@@ -887,8 +909,17 @@
       </div>
     </div>
 
+    <!-- Scroll to Top Button -->
+    <button
+      id="scroll-to-top"
+      class="fixed bottom-8 right-8 bg-primary/80 dark:bg-primary/90 text-white w-12 h-12 rounded-full hidden justify-center items-center shadow-lg hover:bg-primary transition-all duration-300 transform hover:-translate-y-1 focus:outline-none z-50"
+    >
+      <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
     <!-- AOS JS Library -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="snow.js"></script>
     <script>
       // AOS Init
       AOS.init({
@@ -896,6 +927,19 @@
         offset: 50, // Tetiklenme mesafesi
         duration: 800, // Animasyon süresi
         easing: "ease-out-cubic",
+      });
+
+      // --- LET IT SNOW ---
+      const snowBtn = document.getElementById("snow-btn");
+      let isSnowing = false;
+      snowBtn.addEventListener("click", () => {
+        if (isSnowing) {
+          stopSnowing();
+          isSnowing = false;
+        } else {
+          startSnowing();
+          isSnowing = true;
+        }
       });
 
       // --- DAKTİLO EFEKTİ (TYPEWRITER) ---
@@ -1074,6 +1118,132 @@
               error
             );
           });
+      });
+
+      // --- KOD EDİTÖRÜ DAKTİLO EFEKTİ ---
+      const codeEditor = document.getElementById("code-editor");
+      const codeLines = [
+        {
+          text: "#include <stdio.h>",
+          color: "purple",
+          indent: 0,
+          delayAfter: 200,
+        },
+        { text: "", indent: 0, delayAfter: 100 },
+        { text: "int main() {", color: "purple", indent: 0, delayAfter: 200 },
+        {
+          text: "// Geleceği kodluyorum...",
+          color: "slate",
+          indent: 1,
+          delayAfter: 300,
+        },
+        {
+          text: 'char *hedef = "Full Stack Developer";',
+          color: "green",
+          indent: 1,
+          delayAfter: 200,
+        },
+        {
+          text: "int motivasyon = 100;",
+          color: "amber",
+          indent: 1,
+          delayAfter: 200,
+        },
+        { text: "", indent: 0, delayAfter: 100 },
+        {
+          text: "while (motivasyon > 0) {",
+          color: "blue",
+          indent: 1,
+          delayAfter: 200,
+        },
+        {
+          text: 'learn("Yeni Teknolojiler");',
+          color: "green",
+          indent: 2,
+          delayAfter: 150,
+        },
+        {
+          text: 'build("Projeler");',
+          color: "green",
+          indent: 2,
+          delayAfter: 150,
+        },
+        { text: "}", indent: 1, delayAfter: 200 },
+        { text: "", indent: 0, delayAfter: 100 },
+        { text: "return 0;", color: "purple", indent: 1, delayAfter: 200 },
+        { text: "}", indent: 0, delayAfter: 500 },
+      ];
+
+      let lineIndex = 0;
+
+      function typeCode() {
+        if (lineIndex >= codeLines.length) {
+          // Animasyon bitti, imleci göster
+          const cursor = document.createElement("div");
+          cursor.className =
+            "mt-2 w-2.5 h-5 bg-blue-500 animate-pulse inline-block align-middle";
+          codeEditor.appendChild(cursor);
+          return;
+        }
+
+        const line = codeLines[lineIndex];
+        const lineEl = document.createElement("div");
+        lineEl.style.paddingLeft = `${line.indent * 1.5}rem`;
+        codeEditor.appendChild(lineEl);
+
+        let charIndex = 0;
+        function typeChar() {
+          if (charIndex < line.text.length) {
+            const char = line.text.charAt(charIndex);
+            const span = document.createElement("span");
+
+            // Renk belirleme
+            if (line.color === "purple") {
+              span.className = "text-purple-400";
+            } else if (line.color === "green") {
+              span.className = "text-green-400";
+            } else if (line.color === "amber") {
+              span.className = "text-amber-400";
+            } else if (line.color === "blue") {
+              span.className = "text-blue-400";
+            } else if (line.color === "slate") {
+              span.className = "text-slate-500 italic";
+            } else {
+              span.className = "text-slate-300";
+            }
+
+            span.textContent = char;
+            lineEl.appendChild(span);
+            charIndex++;
+            setTimeout(typeChar, 15); // Karakter yazma hızı düşürüldü
+          } else {
+            lineIndex++;
+            setTimeout(typeCode, line.delayAfter);
+          }
+        }
+        typeChar();
+      }
+
+      document.addEventListener("DOMContentLoaded", typeCode);
+
+      // --- SCROLL TO TOP BUTTON ---
+      const scrollToTopBtn = document.getElementById("scroll-to-top");
+
+      window.addEventListener("scroll", () => {
+        if (window.pageYOffset > 300) {
+          scrollToTopBtn.classList.remove("hidden");
+          scrollToTopBtn.classList.add("flex");
+        } else {
+          scrollToTopBtn.classList.add("hidden");
+          scrollToTopBtn.classList.remove("flex");
+        }
+      });
+
+      scrollToTopBtn.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
       });
     </script>
   </body>
