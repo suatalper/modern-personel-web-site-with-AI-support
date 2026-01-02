@@ -38,6 +38,7 @@
               blob: "blob 10s infinite", // Hızı biraz yavaşlattık, daha akıcı olsun
               "spin-slow": "spin 12s linear infinite",
               blink: "blink 1s step-end infinite",
+              wiggle: "wiggle 1s ease-in-out infinite",
             },
             keyframes: {
               float: {
@@ -53,6 +54,10 @@
               blink: {
                 "0%, 100%": { opacity: "1" },
                 "50%": { opacity: "0" },
+              },
+              wiggle: {
+                "0%, 100%": { transform: "rotate(-3deg)" },
+                "50%": { transform: "rotate(3deg)" },
               },
             },
           },
@@ -92,6 +97,10 @@
         to {
           background-position: 200% center;
         }
+      }
+
+      .group:hover .fa-mug-hot {
+        animation: wiggle 1s ease-in-out;
       }
 
       /* Scrollbar Özelleştirme */
@@ -242,6 +251,19 @@
               <i class="fa-solid fa-snowflake text-lg"></i>
             </button>
 
+            <!-- Buy Me a Coffee Button -->
+            <a
+              href="https://www.buymeacoffee.com/suatalper"
+              target="_blank"
+              class="group flex items-center justify-center px-4 py-2 rounded-full bg-yellow-400 text-slate-800 hover:bg-yellow-500 transition-all focus:outline-none transform hover:scale-105 hover:-rotate-3 duration-300"
+              title="Bana bir kahve ısmarla!"
+            >
+              <i
+                class="fa-solid fa-mug-hot text-lg transition-transform duration-300"
+              ></i>
+              <span class="ml-2 text-sm font-medium">Bana destek ol !</span>
+            </a>
+
             <a
               href="#contact"
               class="px-5 py-2.5 rounded-full bg-secondary dark:bg-white dark:text-secondary text-white text-sm font-medium hover:bg-slate-800 dark:hover:bg-gray-200 transition-all shadow-lg hover:shadow-primary/50 transform hover:-translate-y-1 active:scale-95"
@@ -252,12 +274,15 @@
 
           <!-- Mobile Controls -->
           <div class="flex items-center space-x-4 md:hidden">
-            <button
-              id="snow-btn-mobile"
-              class="p-2 rounded-full text-slate-500 dark:text-slate-400 dark:hover:bg-slate-800 transition-all focus:outline-none"
+            <!-- Buy Me a Coffee Button -->
+            <a
+              href="https://www.buymeacoffee.com/suatalper"
+              target="_blank"
+              class="group flex items-center justify-center p-2 rounded-full bg-yellow-400 text-slate-800 hover:bg-yellow-500 transition-all focus:outline-none transform hover:scale-110"
+              title="Bana bir kahve ısmarla!"
             >
-              <i class="fa-solid fa-snowflake text-lg"></i>
-            </button>
+              <i class="fa-solid fa-mug-hot text-lg"></i>
+            </a>
             <button
               id="mobile-menu-btn"
               class="text-slate-600 dark:text-slate-300 hover:text-secondary dark:hover:text-white focus:outline-none p-2"
@@ -289,6 +314,13 @@
             class="block px-3 py-3 rounded-lg text-base font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-primary transition-colors"
             >İletişim</a
           >
+          <a
+            href="https://www.buymeacoffee.com/suatalper"
+            target="_blank"
+            class="block px-3 py-3 text-center rounded-lg text-base font-medium bg-yellow-400 text-slate-800 shadow-lg hover:bg-yellow-500 transition-colors"
+          >
+            Bana destek ol ! <i class="fa-solid fa-mug-hot ml-2"></i>
+          </a>
           <a
             href="#contact"
             class="block px-3 py-3 mt-4 text-center rounded-lg text-base font-medium bg-primary text-white shadow-lg shadow-blue-500/30 hover:bg-blue-700 transition-colors"
@@ -910,6 +942,42 @@
       <i class="fa-solid fa-arrow-up"></i>
     </button>
 
+    <!-- Destek Ol Pop-up -->
+    <div
+      id="popup-overlay"
+      class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden justify-center items-center p-4"
+    >
+      <div
+        id="popup-menu"
+        class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-2xl w-full max-w-md m-4 text-center transform transition-all"
+        data-aos="zoom-in-up"
+      >
+        <h3 class="text-2xl font-bold text-secondary dark:text-white mb-4">
+          Desteğiniz benim için önemli!
+        </h3>
+        <p class="text-slate-500 dark:text-slate-400 mb-8">
+          Bu web sitesini ve projelerimi geliştirmeye devam etmem için bana bir
+          kahve ısmarlayarak destek olabilirsiniz. Her destek, daha fazla içerik
+          ve daha iyi projeler demek!
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <a
+            href="https://www.buymeacoffee.com/suatalper"
+            target="_blank"
+            class="w-full sm:w-auto px-6 py-3 rounded-full bg-yellow-400 text-slate-800 font-bold hover:bg-yellow-500 transition-colors transform hover:scale-105 flex items-center justify-center"
+          >
+            <i class="fa-solid fa-mug-hot mr-2"></i> Bana bir kahve ısmarla!
+          </a>
+          <button
+            id="close-popup"
+            class="w-full sm:w-auto px-6 py-3 rounded-full bg-slate-200 dark:bg-slate-700 text-secondary dark:text-white font-bold hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"
+          >
+            Belki daha sonra
+          </button>
+        </div>
+      </div>
+    </div>
+
     <!-- AOS JS Library -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="snow.js"></script>
@@ -924,8 +992,8 @@
 
       // --- LET IT SNOW ---
       const snowBtns = [
-          document.getElementById("snow-btn"),
-          document.getElementById("snow-btn-mobile")
+        document.getElementById("snow-btn"),
+        document.getElementById("snow-btn-mobile"),
       ];
       let isSnowing = false;
 
@@ -939,9 +1007,9 @@
         }
       };
 
-      snowBtns.forEach(btn => {
-        if(btn) {
-            btn.addEventListener("click", toggleSnow);
+      snowBtns.forEach((btn) => {
+        if (btn) {
+          btn.addEventListener("click", toggleSnow);
         }
       });
 
@@ -1280,6 +1348,42 @@
         window.scrollTo({
           top: 0,
           behavior: "smooth",
+        });
+      });
+
+      // --- DESTEK OL POP-UP ---
+      document.addEventListener("DOMContentLoaded", () => {
+        const popupOverlay = document.getElementById("popup-overlay");
+        const closePopupButton = document.getElementById("close-popup");
+
+        if (!popupOverlay || !closePopupButton) return;
+
+        // Show the popup if it hasn't been shown before
+        if (!localStorage.getItem("popupShown")) {
+          // We will show it with a small delay to not be too intrusive
+          setTimeout(() => {
+            popupOverlay.classList.remove("hidden");
+            popupOverlay.classList.add("flex");
+            // Trigger AOS animation
+            AOS.refresh();
+          }, 2500); // 2.5-second delay
+        }
+
+        const closePopup = () => {
+          popupOverlay.classList.add("hidden");
+          popupOverlay.classList.remove("flex");
+          // Remember that the popup has been shown
+          localStorage.setItem("popupShown", "true");
+        };
+
+        // Close the popup
+        closePopupButton.addEventListener("click", closePopup);
+
+        // Also close if the user clicks on the overlay
+        popupOverlay.addEventListener("click", (event) => {
+          if (event.target === popupOverlay) {
+            closePopup();
+          }
         });
       });
     </script>
