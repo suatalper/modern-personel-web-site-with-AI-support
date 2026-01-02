@@ -1098,27 +1098,62 @@
         }, 3000);
       }
       // --- GITHUB STATS ÇEKME ---
+      // --- GITHUB STATS ÇEKME (CANLI) ---
       document.addEventListener("DOMContentLoaded", () => {
-        // Dikkat: Dosya adının başında sadece tek nokta var ./stats.json
-        fetch("./stats.json")
+        // GitHub kullanıcı adın
+        const username = "suatalper";
+
+        // Bu API, GitHub profilindeki katkı (contribution) grafiğini tarar ve toplam sayıyı verir.
+        // Hem ücretsizdir hem de API Key gerektirmez.
+        fetch(`https://github-contributions-api.jogruber.de/v4/${username}`)
           .then((response) => {
-            if (!response.ok)
-              throw new Error("Dosya Bulunamadı (Localde normal)");
+            if (!response.ok) throw new Error("Veri çekilemedi");
             return response.json();
           })
           .then((data) => {
             const statsElement = document.getElementById("github-stats");
-            if (data && data.commits) {
-              statsElement.innerText = data.commits + "+";
+
+            // API, yılları ayrı ayrı nesne olarak döndürür (Örn: {"2024": 150, "2025": 20})
+            // Biz bu sayıların hepsini topluyoruz:
+            if (data && data.total) {
+              const totalContributions = Object.values(data.total).reduce(
+                (a, b) => a + b,
+                0
+              );
+
+              // Sayıyı ekrana yazdır (Animasyonlu artış efekti eklenebilir ama şimdilik düz yazıyoruz)
+              statsElement.innerText = totalContributions + "+";
             }
           })
           .catch((error) => {
-            console.log(
-              "İstatistik yüklenemedi, varsayılan değer gösteriliyor:",
-              error
-            );
+            console.log("GitHub verisi alınamadı:", error);
+            // Hata olursa varsayılan bir değerde kalsın veya gizlensin
+            const statsElement = document.getElementById("github-stats");
+            statsElement.innerText = "100+";
           });
       });
+
+      // document.addEventListener("DOMContentLoaded", () => {
+      //   // Dikkat: Dosya adının başında sadece tek nokta var ./stats.json
+      //   fetch("./stats.json")
+      //     .then((response) => {
+      //       if (!response.ok)
+      //         throw new Error("Dosya Bulunamadı (Localde normal)");
+      //       return response.json();
+      //     })
+      //     .then((data) => {
+      //       const statsElement = document.getElementById("github-stats");
+      //       if (data && data.commits) {
+      //         statsElement.innerText = data.commits + "+";
+      //       }
+      //     })
+      //     .catch((error) => {
+      //       console.log(
+      //         "İstatistik yüklenemedi, varsayılan değer gösteriliyor:",
+      //         error
+      //       );
+      //     });
+      // });
 
       // --- KOD EDİTÖRÜ DAKTİLO EFEKTİ ---
       const codeEditor = document.getElementById("code-editor");
