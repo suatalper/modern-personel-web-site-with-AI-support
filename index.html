@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="tr" class="scroll-smooth">
+<html lang="tr" class="scroll-smooth dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -234,17 +234,6 @@
               >İletişim</a
             >
 
-            <!-- Tema Değiştirme Butonu (Desktop) -->
-            <button
-              id="theme-toggle"
-              class="p-2 rounded-full text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 transition-all focus:outline-none hover:rotate-12 transform duration-300"
-            >
-              <i class="fa-solid fa-moon dark:hidden text-lg"></i>
-              <i
-                class="fa-solid fa-sun hidden dark:inline text-lg text-amber-400"
-              ></i>
-            </button>
-
             <!-- Let it Snow Button -->
             <button
               id="snow-btn"
@@ -263,16 +252,6 @@
 
           <!-- Mobile Controls -->
           <div class="flex items-center space-x-4 md:hidden">
-            <button
-              id="theme-toggle-mobile"
-              class="p-2 rounded-full text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 transition-all focus:outline-none"
-            >
-              <i class="fa-solid fa-moon dark:hidden text-xl"></i>
-              <i
-                class="fa-solid fa-sun hidden dark:inline text-xl text-amber-400"
-              ></i>
-            </button>
-
             <button
               id="mobile-menu-btn"
               class="text-slate-600 dark:text-slate-300 hover:text-secondary dark:hover:text-white focus:outline-none p-2"
@@ -686,6 +665,7 @@
 
     <!-- Küçük İstatistikler (Öğrenci Metrikleri) -->
     <section
+      id="stats-section"
       class="py-12 bg-secondary dark:bg-slate-950 text-white border-y border-slate-800 dark:border-slate-800/50 transition-colors duration-300"
     >
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -694,17 +674,21 @@
         >
           <div class="p-4" data-aos="zoom-in" data-aos-delay="0">
             <div
+              id="years-of-code"
               class="text-3xl font-bold text-primary dark:text-blue-400 mb-1"
+              data-target="2"
             >
-              2+
+              0+
             </div>
             <div class="text-slate-400 text-sm">Yıldır Kod Yazıyorum</div>
           </div>
           <div class="p-4" data-aos="zoom-in" data-aos-delay="100">
             <div
+              id="personal-projects"
               class="text-3xl font-bold text-primary dark:text-blue-400 mb-1"
+              data-target="15"
             >
-              15+
+              0+
             </div>
             <div class="text-slate-400 text-sm">Kişisel Proje</div>
           </div>
@@ -712,16 +696,19 @@
             <div
               id="github-stats"
               class="text-3xl font-bold text-primary dark:text-blue-400 mb-1"
+              data-target="100"
             >
-              100+
+              0+
             </div>
             <div class="text-slate-400 text-sm">GitHub Commits</div>
           </div>
           <div class="p-4" data-aos="zoom-in" data-aos-delay="300">
             <div
+              id="learning-motivation"
               class="text-3xl font-bold text-primary dark:text-blue-400 mb-1"
+              data-target="100"
             >
-              %100
+              %0
             </div>
             <div class="text-slate-400 text-sm">Öğrenme Motivasyonu</div>
           </div>
@@ -994,39 +981,6 @@
       // Animasyonu başlat
       document.addEventListener("DOMContentLoaded", type);
 
-      // --- KARANLIK MOD MANTIĞI ---
-      const themeToggleBtns = [
-        document.getElementById("theme-toggle"),
-        document.getElementById("theme-toggle-mobile"),
-      ];
-      const html = document.documentElement;
-
-      // Sayfa yüklendiğinde tercihi kontrol et
-      if (
-        localStorage.getItem("color-theme") === "dark" ||
-        (!("color-theme" in localStorage) &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches)
-      ) {
-        html.classList.add("dark");
-      } else {
-        html.classList.remove("dark");
-      }
-
-      // Her iki butona da tıklama olayı ekle
-      themeToggleBtns.forEach((btn) => {
-        if (btn) {
-          btn.addEventListener("click", function () {
-            html.classList.toggle("dark");
-
-            if (html.classList.contains("dark")) {
-              localStorage.setItem("color-theme", "dark");
-            } else {
-              localStorage.setItem("color-theme", "light");
-            }
-          });
-        }
-      });
-
       // --- MOBİL MENÜ MANTIĞI ---
       const menuBtn = document.getElementById("mobile-menu-btn");
       const menu = document.getElementById("mobile-menu");
@@ -1097,63 +1051,95 @@
           toast.classList.add("-translate-y-32");
         }, 3000);
       }
-      // --- GITHUB STATS ÇEKME ---
-      // --- GITHUB STATS ÇEKME (CANLI) ---
+
+      // --- STATS COUNTER & GITHUB STATS ---
       document.addEventListener("DOMContentLoaded", () => {
-        // GitHub kullanıcı adın
-        const username = "suatalper";
+        const statsSection = document.getElementById("stats-section");
+        if (!statsSection) return;
 
-        // Bu API, GitHub profilindeki katkı (contribution) grafiğini tarar ve toplam sayıyı verir.
-        // Hem ücretsizdir hem de API Key gerektirmez.
-        fetch(`https://github-contributions-api.jogruber.de/v4/${username}`)
-          .then((response) => {
-            if (!response.ok) throw new Error("Veri çekilemedi");
-            return response.json();
-          })
-          .then((data) => {
-            const statsElement = document.getElementById("github-stats");
+        const animateCount = (el, target, duration = 2000) => {
+          let start = 0;
+          const initialHTML = el.innerHTML;
+          const prefix = initialHTML.includes("%") ? "%" : "";
+          const suffix = initialHTML.includes("+") ? "+" : "";
 
-            // API, yılları ayrı ayrı nesne olarak döndürür (Örn: {"2024": 150, "2025": 20})
-            // Biz bu sayıların hepsini topluyoruz:
-            if (data && data.total) {
-              const totalContributions = Object.values(data.total).reduce(
-                (a, b) => a + b,
-                0
-              );
+          const step = (timestamp) => {
+            if (!start) start = timestamp;
+            const progress = timestamp - start;
+            let current = Math.floor(target * (progress / duration));
+            current = Math.min(current, target); // Ensure it doesn't exceed target
 
-              // Sayıyı ekrana yazdır (Animasyonlu artış efekti eklenebilir ama şimdilik düz yazıyoruz)
-              statsElement.innerText = totalContributions + "+";
+            el.innerHTML = `${prefix}${current}${suffix}`;
+
+            if (progress < duration) {
+              window.requestAnimationFrame(step);
+            } else {
+              el.innerHTML = `${prefix}${target}${suffix}`;
             }
-          })
-          .catch((error) => {
-            console.log("GitHub verisi alınamadı:", error);
-            // Hata olursa varsayılan bir değerde kalsın veya gizlensin
-            const statsElement = document.getElementById("github-stats");
-            statsElement.innerText = "100+";
-          });
-      });
+          };
+          window.requestAnimationFrame(step);
+        };
 
-      // document.addEventListener("DOMContentLoaded", () => {
-      //   // Dikkat: Dosya adının başında sadece tek nokta var ./stats.json
-      //   fetch("./stats.json")
-      //     .then((response) => {
-      //       if (!response.ok)
-      //         throw new Error("Dosya Bulunamadı (Localde normal)");
-      //       return response.json();
-      //     })
-      //     .then((data) => {
-      //       const statsElement = document.getElementById("github-stats");
-      //       if (data && data.commits) {
-      //         statsElement.innerText = data.commits + "+";
-      //       }
-      //     })
-      //     .catch((error) => {
-      //       console.log(
-      //         "İstatistik yüklenemedi, varsayılan değer gösteriliyor:",
-      //         error
-      //       );
-      //     });
-      // });
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                // Animate static counters
+                const staticCounters = [
+                  document.getElementById("years-of-code"),
+                  document.getElementById("personal-projects"),
+                  document.getElementById("learning-motivation"),
+                ];
+                staticCounters.forEach((counter) => {
+                  if (counter) {
+                    const target = parseInt(
+                      counter.getAttribute("data-target")
+                    );
+                    animateCount(counter, target);
+                  }
+                });
+
+                // Fetch and animate GitHub stats
+                const githubStatsEl = document.getElementById("github-stats");
+                if (githubStatsEl) {
+                  const username = "suatalper";
+                  fetch(
+                    `https://github-contributions-api.jogruber.de/v4/${username}`
+                  )
+                    .then((response) =>
+                      response.ok
+                        ? response.json()
+                        : Promise.reject("API error")
+                    )
+                    .then((data) => {
+                      if (data && data.total) {
+                        const totalContributions = Object.values(
+                          data.total
+                        ).reduce((a, b) => a + b, 0);
+                        animateCount(githubStatsEl, totalContributions);
+                      } else {
+                        animateCount(
+                          githubStatsEl,
+                          parseInt(githubStatsEl.getAttribute("data-target"))
+                        );
+                      }
+                    })
+                    .catch(() => {
+                      animateCount(
+                        githubStatsEl,
+                        parseInt(githubStatsEl.getAttribute("data-target"))
+                      );
+                    });
+                }
+                observer.unobserve(statsSection);
+              }
+            });
+          },
+          { threshold: 0.2 }
+        );
+
+        observer.observe(statsSection);
+      });
 
       // --- KOD EDİTÖRÜ DAKTİLO EFEKTİ ---
       const codeEditor = document.getElementById("code-editor");
