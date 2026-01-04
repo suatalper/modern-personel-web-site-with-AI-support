@@ -1335,7 +1335,6 @@
                 // Animate static counters
                 const staticCounters = [
                   document.getElementById("years-of-code"),
-                  document.getElementById("personal-projects"),
                   document.getElementById("learning-motivation"),
                 ];
                 staticCounters.forEach((counter) => {
@@ -1347,6 +1346,26 @@
                   }
                 });
 
+                // Fetch and animate GitHub stats (Repositories)
+                const personalProjectsEl = document.getElementById("personal-projects");
+                if (personalProjectsEl) {
+                   const username = "suatalper";
+                   fetch(`https://api.github.com/users/${username}`)
+                    .then((response) => 
+                      response.ok ? response.json() : Promise.reject("API error")
+                    )
+                    .then((data) => {
+                       if (data && typeof data.public_repos !== 'undefined') {
+                         animateCount(personalProjectsEl, data.public_repos);
+                       } else {
+                         animateCount(personalProjectsEl, parseInt(personalProjectsEl.getAttribute("data-target")));
+                       }
+                    })
+                    .catch(() => {
+                       animateCount(personalProjectsEl, parseInt(personalProjectsEl.getAttribute("data-target")));
+                    });
+                }
+                
                 // Fetch and animate GitHub stats
                 const githubStatsEl = document.getElementById("github-stats");
                 if (githubStatsEl) {
