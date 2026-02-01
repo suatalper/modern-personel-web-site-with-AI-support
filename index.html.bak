@@ -1,0 +1,1583 @@
+<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="logo.png" />
+    <!-- <title>Kişisel Portfolyo | Suat Alper Çinsar</title> -->
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- AOS Animation Library CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+            colors: {
+              primary: "var(--color-primary)",
+              secondary: "var(--color-secondary)",
+              accent: "var(--color-accent)",
+            },
+            animation: {
+              float: "float 6s ease-in-out infinite",
+              blob: "blob 10s infinite",
+              "spin-slow": "spin 12s linear infinite",
+              blink: "blink 1s step-end infinite",
+              wiggle: "wiggle 1s ease-in-out infinite",
+            },
+            keyframes: {
+              float: {
+                "0%, 100%": { transform: "translateY(0)" },
+                "50%": { transform: "translateY(-20px)" },
+              },
+              blob: {
+                "0%": { transform: "translate(0px, 0px) scale(1)" },
+                "33%": { transform: "translate(30px, -50px) scale(1.2)" },
+                "66%": { transform: "translate(-20px, 20px) scale(0.8)" },
+                "100%": { transform: "translate(0px, 0px) scale(1)" },
+              },
+              blink: {
+                "0%, 100%": { opacity: "1" },
+                "50%": { opacity: "0" },
+              },
+              wiggle: {
+                "0%, 100%": { transform: "rotate(-3deg)" },
+                "50%": { transform: "rotate(3deg)" },
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      /* Yumuşak geçişler için */
+      :root {
+        --color-primary: #2563eb;
+        --color-secondary: #0f172a;
+        --color-accent: #f59e0b;
+      }
+      body {
+        transition: background-color 0.5s ease, color 0.5s ease;
+      }
+
+      .hero-gradient {
+        background: linear-gradient(to right bottom, #eff6ff, #ffffff);
+      }
+      .dark .hero-gradient {
+        background: linear-gradient(to right bottom, #0f172a, #1e293b);
+      }
+
+      /* Animasyonlu Text Gradyan */
+      .text-gradient {
+        background: linear-gradient(to right, #2563eb, #9333ea, #2563eb);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: gradientMove 3s linear infinite;
+      }
+      .dark .text-gradient {
+        background: linear-gradient(to right, #60a5fa, #c084fc, #60a5fa);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: gradientMove 3s linear infinite;
+      }
+
+      @keyframes gradientMove {
+        to {
+          background-position: 200% center;
+        }
+      }
+
+      .group:hover .fa-mug-hot {
+        animation: wiggle 1s ease-in-out;
+      }
+
+      /* Scrollbar Özelleştirme */
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #1e293b;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #2563eb;
+        border-radius: 5px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #1d4ed8;
+      }
+
+      .snowflake {
+        color: #fff;
+        position: fixed;
+        top: -10%;
+        z-index: 9999;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        cursor: default;
+        -webkit-animation-name: snowflakes-fall, snowflakes-shake;
+        -webkit-animation-duration: 10s, 3s;
+        -webkit-animation-timing-function: linear, ease-in-out;
+        -webkit-animation-iteration-count: infinite, infinite;
+        -webkit-animation-play-state: running, running;
+        animation-name: snowflakes-fall, snowflakes-shake;
+        animation-duration: 10s, 3s;
+        animation-timing-function: linear, ease-in-out;
+        animation-iteration-count: infinite, infinite;
+        animation-play-state: running, running;
+      }
+      .snowflake:before {
+        content: "❆";
+      }
+      @-webkit-keyframes snowflakes-fall {
+        0% {
+          top: -10%;
+        }
+        100% {
+          top: 100%;
+        }
+      }
+      @-webkit-keyframes snowflakes-shake {
+        0% {
+          -webkit-transform: translateX(0px);
+          transform: translateX(0px);
+        }
+        50% {
+          -webkit-transform: translateX(80px);
+          transform: translateX(80px);
+        }
+        100% {
+          -webkit-transform: translateX(0px);
+          transform: translateX(0px);
+        }
+      }
+      @keyframes snowflakes-fall {
+        0% {
+          top: -10%;
+        }
+        100% {
+          top: 100%;
+        }
+      }
+      @keyframes snowflakes-shake {
+        0% {
+          transform: translateX(0px);
+        }
+        50% {
+          transform: translateX(80px);
+        }
+        100% {
+          transform: translateX(0px);
+        }
+      }
+    </style>
+  </head>
+  <body
+    class="font-sans text-slate-600 dark:text-slate-300 antialiased bg-white dark:bg-slate-900 overflow-x-hidden"
+  >
+    <!-- Hareketli Arkaplan Blobları (Belirginleştirildi) -->
+    <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+      <!-- Opaklık (opacity) artırıldı: 0.3 -> 0.5 ve 0.4 -->
+      <div
+        class="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/40 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob"
+      ></div>
+      <div
+        class="absolute top-0 right-1/4 w-96 h-96 bg-purple-500/40 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob animation-delay-2000"
+      ></div>
+      <div
+        class="absolute -bottom-32 left-1/3 w-96 h-96 bg-amber-500/40 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob animation-delay-4000"
+      ></div>
+    </div>
+
+    <!-- Navigasyon -->
+    <nav
+      class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-lg border-b border-gray-100 dark:border-slate-800 fixed w-full z-50 transition-all duration-300"
+      id="navbar"
+      data-aos="fade-down"
+      data-aos-duration="1000"
+    >
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16 items-center">
+          <!-- Logo / İsim -->
+          <div class="flex-shrink-0 flex items-center">
+            <a
+              href="#"
+              class="text-2xl font-bold text-secondary dark:text-white tracking-tight transition-colors group"
+            >
+              Suat Alper<span
+                class="text-primary group-hover:text-purple-500 transition-colors duration-300"
+              >
+                Çinsar</span
+              >.
+            </a>
+          </div>
+
+          <!-- Desktop Menu -->
+          <div class="hidden md:flex items-center space-x-8">
+            <a
+              href="#home"
+              class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary transition-colors hover:scale-105 transform duration-200"
+              data-i18n="nav_home">Ana Sayfa</a
+            >
+            <a
+              href="#skills"
+              class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary transition-colors hover:scale-105 transform duration-200"
+              data-i18n="nav_skills">Yetenekler</a
+            >
+            <a
+              href="#contact"
+              class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary transition-colors hover:scale-105 transform duration-200"
+              data-i18n="nav_contact">İletişim</a
+            >
+
+            <!-- Language Toggle -->
+            <button
+              id="lang-toggle"
+              onclick="toggleLanguage()"
+              class="flex items-center space-x-1 text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-primary transition-colors"
+            >
+              <img
+                id="lang-flag"
+                src="https://flagcdn.com/w20/tr.png"
+                alt="TR"
+                class="w-5 h-auto rounded-sm"
+              />
+              <span id="lang-text">TR</span>
+            </button>
+
+            <!-- Let it Snow Button -->
+            <button
+              id="snow-btn"
+              class="p-2 rounded-full text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800 transition-all focus:outline-none hover:rotate-12 transform duration-300"
+            >
+              <i class="fa-solid fa-snowflake text-lg"></i>
+            </button>
+
+            <!-- Buy Me a Coffee Button -->
+            <a
+              href="https://www.buymeacoffee.com/suatalper"
+              target="_blank"
+              class="group flex items-center justify-center px-4 py-2 rounded-full bg-yellow-400 text-slate-800 hover:bg-yellow-500 transition-all focus:outline-none transform hover:scale-105 hover:-rotate-3 duration-300"
+              title="Bana bir kahve ısmarla!"
+            >
+              <i
+                class="fa-solid fa-mug-hot text-lg transition-transform duration-300"
+              ></i>
+              <span class="ml-2 text-sm font-medium" data-i18n="nav_support">Bana destek ol !</span>
+            </a>
+
+            <a
+              href="#contact"
+              class="px-5 py-2.5 rounded-full bg-secondary dark:bg-white dark:text-secondary text-white text-sm font-medium hover:bg-slate-800 dark:hover:bg-gray-200 transition-all shadow-lg hover:shadow-primary/50 transform hover:-translate-y-1 active:scale-95"
+              data-i18n="nav_reach"
+            >
+              Bana Ulaşın
+            </a>
+          </div>
+
+          <!-- Mobile Controls -->
+          <div class="flex items-center space-x-4 md:hidden">
+            <!-- Buy Me a Coffee Button -->
+            <a
+              href="https://www.buymeacoffee.com/suatalper"
+              target="_blank"
+              class="group flex items-center justify-center p-2 rounded-full bg-yellow-400 text-slate-800 hover:bg-yellow-500 transition-all focus:outline-none transform hover:scale-110"
+              title="Bana bir kahve ısmarla!"
+            >
+              <i class="fa-solid fa-mug-hot text-lg"></i>
+            </a>
+            <!-- Mobile Lang Toggle -->
+            <button
+              onclick="toggleLanguage()"
+              class="p-2 text-slate-600 dark:text-slate-300 hover:text-primary transition-colors flex items-center gap-1"
+            >
+              <img
+                id="lang-flag-mobile"
+                src="https://flagcdn.com/w20/tr.png"
+                alt="TR"
+                class="w-5 h-auto rounded-sm"
+              />
+              <span id="lang-text-mobile" class="text-xs font-bold">TR</span>
+            </button>
+            <button
+              id="mobile-menu-btn"
+              class="text-slate-600 dark:text-slate-300 hover:text-secondary dark:hover:text-white focus:outline-none p-2"
+            >
+              <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Menu Panel -->
+      <div
+        id="mobile-menu"
+        class="hidden md:hidden bg-white dark:bg-slate-900 border-t border-gray-100 dark:border-slate-800 absolute w-full shadow-xl"
+      >
+        <div class="px-4 pt-2 pb-6 space-y-1">
+          <a
+            href="#home"
+            class="block px-3 py-3 rounded-lg text-base font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-primary transition-colors"
+            data-i18n="nav_home">Ana Sayfa</a
+          >
+          <a
+            href="#skills"
+            class="block px-3 py-3 rounded-lg text-base font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-primary transition-colors"
+            data-i18n="nav_skills">Yetenekler</a
+          >
+          <a
+            href="#contact"
+            class="block px-3 py-3 rounded-lg text-base font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-primary transition-colors"
+            data-i18n="nav_contact">İletişim</a
+          >
+          <a
+            href="https://www.buymeacoffee.com/suatalper"
+            target="_blank"
+            class="block px-3 py-3 text-center rounded-lg text-base font-medium bg-yellow-400 text-slate-800 shadow-lg hover:bg-yellow-500 transition-colors"
+          >
+            <span data-i18n="nav_support">Bana destek ol !</span> <i class="fa-solid fa-mug-hot ml-2"></i>
+          </a>
+          <a
+            href="#contact"
+            class="block px-3 py-3 mt-4 text-center rounded-lg text-base font-medium bg-primary text-white shadow-lg shadow-blue-500/30 hover:bg-blue-700 transition-colors"
+            data-i18n="nav_reach">Bana Ulaşın</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Bölümü (Öğrenci Odaklı) -->
+    <section
+      id="home"
+      class="pt-32 pb-20 md:pt-40 md:pb-32 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto transition-colors duration-300"
+    >
+      <div
+        class="flex flex-col-reverse md:flex-row items-center gap-12 md:gap-20"
+      >
+        <!-- Sol: Yazı -->
+        <div class="flex-1 text-center md:text-left">
+          <!-- Daktilo Efektli Alan -->
+          <div
+            data-aos="fade-right"
+            data-aos-delay="100"
+            class="inline-flex items-center px-4 py-1.5 rounded-full bg-blue-50 dark:bg-blue-900/30 text-primary dark:text-blue-400 text-sm font-semibold mb-6 border border-blue-100 dark:border-blue-800 min-w-[200px]"
+          >
+            <span
+              class="flex h-2 w-2 rounded-full bg-primary mr-3 animate-pulse"
+            ></span>
+            <span id="typewriter-text"></span
+            ><span class="animate-blink text-lg leading-none ml-0.5">|</span>
+          </div>
+
+          <h1
+            data-aos="fade-up"
+            data-aos-delay="200"
+            class="text-4xl md:text-6xl font-bold text-secondary dark:text-white tracking-tight mb-6 leading-tight transition-colors"
+          >
+            <span data-i18n="hero_greeting">Merhaba, Ben</span> <br />
+            <span class="text-gradient">Suat Alper</span>
+          </h1>
+          <p
+            data-aos="fade-up"
+            data-aos-delay="300"
+            class="text-lg md:text-xl text-slate-500 dark:text-slate-400 mb-8 leading-relaxed max-w-2xl mx-auto md:mx-0 transition-colors"
+            data-i18n="hero_desc"
+          >
+            Bilgisayar programcılığı öğrencisiyim. Modern teknolojilerle kendimi
+            geliştiriyor, yaratıcı projeler üretiyorum. Freelance projelerinizde
+            veya ekibinizde yer almak için hazırım.
+          </p>
+          <div
+            data-aos="fade-up"
+            data-aos-delay="400"
+            class="flex flex-col sm:flex-row justify-center md:justify-start gap-4"
+          >
+            <a
+              href="#contact"
+              class="px-8 py-4 rounded-full bg-primary text-white font-bold shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:bg-blue-700 transition-all transform hover:-translate-y-1 hover:scale-105 active:scale-95"
+              data-i18n="hero_cta"
+            >
+              Birlikte Çalışalım
+            </a>
+          </div>
+
+          <!-- Sosyal Medya İkonları -->
+          <div
+            data-aos="fade-up"
+            data-aos-delay="500"
+            class="mt-10 flex justify-center md:justify-start space-x-5 text-slate-400 dark:text-slate-500"
+          >
+            <a
+              target="_blank"
+              href="https://github.com/suatalper"
+              class="hover:text-primary dark:hover:text-blue-400 transition-colors transform hover:scale-125 hover:rotate-6 duration-300"
+              title="GitHub Projelerim"
+              ><i class="fa-brands fa-github text-2xl"></i
+            ></a>
+            <a
+              target="_blank"
+              href="https://www.linkedin.com/in/suat-alper-çinsar-3a0099304/"
+              class="hover:text-primary dark:hover:text-blue-400 transition-colors transform hover:scale-125 hover:-rotate-6 duration-300"
+              title="LinkedIn Profilim"
+              ><i class="fa-brands fa-linkedin text-2xl"></i
+            ></a>
+            <a
+              target="_blank"
+              href="https://www.instagram.com/cinsarsuatalper/"
+              title="Instagram Hesabım"
+              class="hover:text-primary dark:hover:text-blue-400 transition-colors transform hover:scale-125 hover:rotate-6 duration-300"
+              ><i class="fa-brands fa-instagram text-2xl"></i
+            ></a>
+          </div>
+        </div>
+
+        <!-- Sağ: Kod Editörü / İllüstrasyon Alanı -->
+        <div
+          class="flex-1 relative group w-full max-w-lg"
+          data-aos="zoom-in-left"
+          data-aos-duration="1000"
+        >
+          <!-- Arkaplan efekti -->
+          <div
+            class="absolute inset-0 bg-blue-500/10 rounded-[2rem] transform rotate-3 scale-95 blur-xl group-hover:bg-purple-500/20 transition-all duration-700"
+          ></div>
+
+          <!-- Ana Kart -->
+          <div
+            class="relative bg-slate-900 rounded-[1.5rem] shadow-2xl transform transition-transform duration-500 border border-slate-700 overflow-hidden animate-float hover:shadow-purple-500/20"
+          >
+            <!-- Editör Başlık Çubuğu -->
+            <div
+              class="h-10 bg-slate-800 flex items-center px-4 space-x-2 border-b border-slate-700"
+            >
+              <div class="flex space-x-2">
+                <div
+                  class="w-3 h-3 rounded-full bg-red-500/80 hover:bg-red-400 cursor-pointer"
+                ></div>
+                <div
+                  class="w-3 h-3 rounded-full bg-yellow-500/80 hover:bg-yellow-400 cursor-pointer"
+                ></div>
+                <div
+                  class="w-3 h-3 rounded-full bg-green-500/80 hover:bg-green-400 cursor-pointer"
+                ></div>
+              </div>
+              <div class="flex-1 text-center pr-10">
+                <span
+                  class="text-xs text-slate-400 font-mono group-hover:text-white transition-colors"
+                  data-i18n="hero_editor_filename">suat_portfolio.c</span
+                >
+              </div>
+            </div>
+
+            <!-- Editör İçeriği -->
+            <div
+              id="code-editor"
+              class="p-6 md:p-8 font-mono text-sm md:text-base text-slate-300 leading-relaxed"
+            ></div>
+
+            <!-- Yüzen Rozet -->
+            <div
+              class="absolute bottom-6 right-6 bg-slate-800/90 backdrop-blur-md p-3 rounded-xl shadow-xl border border-slate-700 flex items-center gap-3 transition-all hover:scale-110 hover:bg-slate-700"
+            >
+              <div
+                class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center text-green-400 animate-pulse"
+              >
+                <i class="fa-solid fa-check"></i>
+              </div>
+              <div>
+                <p
+                  class="text-[10px] text-slate-400 uppercase font-bold tracking-wider"
+                  data-i18n="hero_editor_status_title"
+                >
+                  Durum
+                </p>
+                <p class="text-white text-xs font-bold" data-i18n="hero_editor_status_desc">İş & Staj Arıyor</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hakkımda ve Yetenekler -->
+    <section
+      id="skills"
+      class="py-24 bg-white dark:bg-slate-900 transition-colors duration-300 relative"
+    >
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+          <h2
+            class="text-3xl font-bold text-secondary dark:text-white mb-4 transition-colors"
+            data-i18n="skills_title"
+          >
+            Neler Yapabilirim?
+          </h2>
+          <p class="text-slate-500 dark:text-slate-400 transition-colors" data-i18n="skills_desc">
+            Okul eğitimimin yanı sıra kendimi sürekli güncel tutuyorum. İşte şu
+            ana kadar geliştirdiğim yetkinlikler ve size sunabileceğim değerler.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Skill 1 -->
+          <div
+            data-aos="fade-up"
+            data-aos-delay="100"
+            class="group p-8 rounded-2xl bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 hover:border-blue-100 dark:hover:border-blue-900 hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300 transform hover:-translate-y-2"
+          >
+            <div
+              class="w-14 h-14 bg-blue-50 dark:bg-blue-900/20 rounded-xl flex items-center justify-center text-primary dark:text-blue-400 text-2xl mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300"
+            >
+              <i class="fa-solid fa-code"></i>
+            </div>
+            <h3
+              class="text-xl font-bold text-secondary dark:text-white mb-3 transition-colors group-hover:text-primary"
+              data-i18n="skill_frontend_title"
+            >
+              Frontend Geliştirme
+            </h3>
+            <p
+              class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-4 transition-colors"
+              data-i18n="skill_frontend_desc"
+            >
+              HTML, CSS, JavaScript ve Tailwind ile modern arayüzler
+              tasarlayabiliyorum. Responsive tasarım konusunda dikkatliyim. Ve
+              kendimi her geçen gün C dilinde daha da geliştiriyorum.
+            </p>
+            <div
+              class="w-full bg-gray-100 dark:bg-slate-700 rounded-full h-1.5 overflow-hidden"
+            >
+              <div
+                class="bg-primary h-1.5 rounded-full transition-all duration-1000 w-0 group-hover:w-full"
+                style="width: 100%"
+              ></div>
+            </div>
+          </div>
+          <!-- Skill 2 -->
+          <div
+            data-aos="fade-up"
+            data-aos-delay="200"
+            class="group p-8 rounded-2xl bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 hover:border-purple-100 dark:hover:border-purple-900 hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-300 transform hover:-translate-y-2"
+          >
+            <div
+              class="w-14 h-14 bg-purple-50 dark:bg-purple-900/20 rounded-xl flex items-center justify-center text-purple-600 dark:text-purple-400 text-2xl mb-6 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300"
+            >
+              <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <h3
+              class="text-xl font-bold text-secondary dark:text-white mb-3 transition-colors group-hover:text-purple-500"
+              data-i18n="skill_learning_title"
+            >
+              Hızlı Öğrenme
+            </h3>
+            <p
+              class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-4 transition-colors"
+              data-i18n="skill_learning_desc"
+            >
+              Yeni teknolojilere hızla adapte olabiliyorum. Araştırmayı,
+              dokümantasyon okumayı ve problem çözmeyi seviyorum.
+            </p>
+            <div
+              class="w-full bg-gray-100 dark:bg-slate-700 rounded-full h-1.5 overflow-hidden"
+            >
+              <div
+                class="bg-purple-600 h-1.5 rounded-full transition-all duration-1000 w-0 group-hover:w-full"
+                style="width: 100%"
+              ></div>
+            </div>
+          </div>
+          <!-- Skill 3 -->
+          <div
+            data-aos="fade-up"
+            data-aos-delay="300"
+            class="group p-8 rounded-2xl bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 hover:border-amber-100 dark:hover:border-amber-900 hover:shadow-xl hover:shadow-amber-500/10 transition-all duration-300 transform hover:-translate-y-2"
+          >
+            <div
+              class="w-14 h-14 bg-amber-50 dark:bg-amber-900/20 rounded-xl flex items-center justify-center text-accent dark:text-amber-400 text-2xl mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300"
+            >
+              <i class="fa-solid fa-rocket"></i>
+            </div>
+            <h3
+              class="text-xl font-bold text-secondary dark:text-white mb-3 transition-colors group-hover:text-accent"
+              data-i18n="skill_project_title"
+            >
+              Proje Odaklılık
+            </h3>
+            <p
+              class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-4 transition-colors"
+              data-i18n="skill_project_desc"
+            >
+              Sadece kod yazmakla kalmayıp, bir projenin fikirden hayata geçiş
+              sürecine katkı sağlamaya çalışıyorum.
+            </p>
+            <div
+              class="w-full bg-gray-100 dark:bg-slate-700 rounded-full h-1.5 overflow-hidden"
+            >
+              <div
+                class="bg-accent h-1.5 rounded-full transition-all duration-1000 w-0 group-hover:w-full"
+                style="width: 100%"
+              ></div>
+            </div>
+          </div>
+          <!-- Skill 4 -->
+          <div
+            data-aos="fade-up"
+            data-aos-delay="400"
+            class="group p-8 rounded-2xl bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 hover:border-green-100 dark:hover:border-green-900 hover:shadow-xl hover:shadow-green-500/10 transition-all duration-300 transform hover:-translate-y-2"
+          >
+            <div
+              class="w-14 h-14 bg-green-50 dark:bg-green-900/20 rounded-xl flex items-center justify-center text-green-600 dark:text-green-400 text-2xl mb-6 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300"
+            >
+              <i class="fa-solid fa-bullseye"></i>
+            </div>
+            <h3
+              class="text-xl font-bold text-secondary dark:text-white mb-3 transition-colors group-hover:text-green-500"
+              data-i18n="skill_goals_title"
+            >
+              Hedeflerim
+            </h3>
+            <p
+              class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-4 transition-colors"
+              data-i18n="skill_goals_desc"
+            >
+              Full-stack uzmanı olmak, büyük ölçekli projelere liderlik etmek ve
+              global yazılım dünyasında iz bırakmak.Kısa vadede ise daha iyi
+              Tailwind kullanımı öğrenmek ve C dilinde ustalaşmak. Ve oyun
+              yazılımı hakkında bilgi sahibi olmak.
+            </p>
+            <div
+              class="w-full bg-gray-100 dark:bg-slate-700 rounded-full h-1.5 overflow-hidden"
+            >
+              <div
+                class="bg-green-600 h-1.5 rounded-full transition-all duration-1000 w-0 group-hover:w-full"
+                style="width: 100%"
+              ></div>
+            </div>
+          </div>
+          <!-- Skill 5 -->
+          <div
+            data-aos="fade-up"
+            data-aos-delay="500"
+            class="group p-8 rounded-2xl bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 hover:border-rose-100 dark:hover:border-rose-900 hover:shadow-xl hover:shadow-rose-500/10 transition-all duration-300 transform hover:-translate-y-2"
+          >
+            <div
+              class="w-14 h-14 bg-rose-50 dark:bg-rose-900/20 rounded-xl flex items-center justify-center text-rose-600 dark:text-rose-400 text-2xl mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300"
+            >
+              <i class="fa-solid fa-language"></i>
+            </div>
+
+            <h3
+              class="text-xl font-bold text-secondary dark:text-white mb-3 transition-colors group-hover:text-rose-500"
+              data-i18n="skill_english_title"
+            >
+              İngilizce
+            </h3>
+
+            <p
+              class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-4 transition-colors"
+              data-i18n="skill_english_desc"
+            >
+              Teknik dokümanları okuyup anlayabiliyor, araştırma yaparken
+              yabancı kaynaklardan faydalanabiliyorum. Orta Okuldan beri
+              İngilizce biliyorum. Hedefim Almanca öğrenmek.
+            </p>
+
+            <div
+              class="w-full bg-gray-100 dark:bg-slate-700 rounded-full h-1.5 overflow-hidden"
+            >
+              <div
+                class="bg-rose-600 h-1.5 rounded-full transition-all duration-1000 w-0 group-hover:w-full"
+                style="width: 100%"
+              ></div>
+            </div>
+          </div>
+          <!-- Skill 6 -->
+          <div
+            data-aos="fade-up"
+            data-aos-delay="600"
+            class="group p-8 rounded-2xl bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 hover:border-cyan-100 dark:hover:border-cyan-900 hover:shadow-xl hover:shadow-cyan-500/10 transition-all duration-300 transform hover:-translate-y-2"
+          >
+            <div
+              class="w-14 h-14 bg-cyan-50 dark:bg-cyan-900/20 rounded-xl flex items-center justify-center text-cyan-600 dark:text-cyan-400 text-2xl mb-6 group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300"
+            >
+              <i class="fa-solid fa-users"></i>
+            </div>
+
+            <h3
+              class="text-xl font-bold text-secondary dark:text-white mb-3 transition-colors group-hover:text-cyan-500"
+              data-i18n="skill_team_title"
+            >
+              Takım Çalışması
+            </h3>
+
+            <p
+              class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-4 transition-colors"
+              data-i18n="skill_team_desc"
+            >
+              Grup projelerinde uyumlu çalışırım, fikir alışverişine açığım ve
+              sorumluluk bilincim yüksektir. Her zaman projelerde Lider rolünü
+              kaparım ve takım arkadaşlarımı motive ederim. Çevremden sık sık
+              iyi bir takım oyuncusu olduğumu ve iyi bir lider olduğumu duyarım.
+            </p>
+
+            <div
+              class="w-full bg-gray-100 dark:bg-slate-700 rounded-full h-1.5 overflow-hidden"
+            >
+              <div
+                class="bg-cyan-600 h-1.5 rounded-full transition-all duration-1000 w-0 group-hover:w-full"
+                style="width: 100%"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Küçük İstatistikler (Öğrenci Metrikleri) -->
+    <section
+      id="stats-section"
+      class="py-12 bg-secondary dark:bg-slate-950 text-white border-y border-slate-800 dark:border-slate-800/50 transition-colors duration-300"
+    >
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-slate-800/50 dark:divide-slate-800"
+        >
+          <div class="p-4" data-aos="zoom-in" data-aos-delay="0">
+            <div
+              id="years-of-code"
+              class="text-3xl font-bold text-primary dark:text-blue-400 mb-1"
+              data-target="2"
+            >
+              0+
+            </div>
+            <div class="text-slate-400 text-sm" data-i18n="stats_years">Yıldır Kod Yazıyorum</div>
+          </div>
+          <div class="p-4" data-aos="zoom-in" data-aos-delay="100">
+            <div
+              id="personal-projects"
+              class="text-3xl font-bold text-primary dark:text-blue-400 mb-1"
+              data-target="15"
+            >
+              0+
+            </div>
+            <div class="text-slate-400 text-sm" data-i18n="stats_projects">Kişisel Proje</div>
+          </div>
+          <div class="p-4" data-aos="zoom-in" data-aos-delay="200">
+            <div
+              id="github-stats"
+              class="text-3xl font-bold text-primary dark:text-blue-400 mb-1"
+              data-target="100"
+            >
+              0+
+            </div>
+            <div class="text-slate-400 text-sm" data-i18n="stats_commits">GitHub Commits</div>
+          </div>
+          <div class="p-4" data-aos="zoom-in" data-aos-delay="300">
+            <div
+              id="learning-motivation"
+              class="text-3xl font-bold text-primary dark:text-blue-400 mb-1"
+              data-target="100"
+            >
+              %0
+            </div>
+            <div class="text-slate-400 text-sm" data-i18n="stats_motivation">Öğrenme Motivasyonu</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- İletişim -->
+    <section
+      id="contact"
+      class="py-24 bg-slate-50 dark:bg-slate-950 transition-colors duration-300"
+    >
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12" data-aos="fade-up">
+          <h2
+            class="text-3xl font-bold text-secondary dark:text-white mb-4 transition-colors"
+            data-i18n="contact_title"
+          >
+            İletişime Geçin
+          </h2>
+          <p class="text-slate-500 dark:text-slate-400 transition-colors" data-i18n="contact_desc">
+            Staj imkanları, freelance projeler veya sadece tanışmak için bana
+            yazabilirsiniz. Kariyerimin başında sizinle çalışmaktan mutluluk
+            duyarım.
+          </p>
+        </div>
+
+        <div
+          data-aos="flip-up"
+          class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl dark:shadow-slate-900/50 border border-gray-100 dark:border-slate-800 p-8 md:p-12 transition-colors"
+        >
+          <form
+            action="https://formspree.io/f/mdaobgqw"
+            method="POST"
+            class="space-y-6"
+          >
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label
+                  class="block text-sm font-semibold text-secondary dark:text-slate-300 mb-2 transition-colors"
+                  data-i18n="contact_name">Adınız</label
+                >
+                <input
+                  type="text"
+                  name="name"
+                  class="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary focus:bg-white dark:focus:bg-slate-800 outline-none transition-all placeholder-slate-400"
+                  placeholder="Adınız"
+                  required
+                  data-i18n="contact_name"
+                />
+              </div>
+              <div>
+                <label
+                  class="block text-sm font-semibold text-secondary dark:text-slate-300 mb-2 transition-colors"
+                  data-i18n="contact_email">E-posta</label
+                >
+                <input
+                  type="email"
+                  name="email"
+                  class="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary focus:bg-white dark:focus:bg-slate-800 outline-none transition-all placeholder-slate-400"
+                  placeholder="ornek@email.com"
+                  required
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                class="block text-sm font-semibold text-secondary dark:text-slate-300 mb-2 transition-colors"
+                data-i18n="contact_subject">Konu</label
+              >
+              <select
+                name="subject"
+                class="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary focus:bg-white dark:focus:bg-slate-800 outline-none transition-all"
+              >
+                <option>Freelance Proje İşi</option>
+                <option>Staj / İş Fırsatı</option>
+                <option>Tanışma</option>
+                <option>Diğer</option>
+              </select>
+            </div>
+            <div>
+              <label
+                class="block text-sm font-semibold text-secondary dark:text-slate-300 mb-2 transition-colors"
+                data-i18n="contact_message">Mesajınız</label
+              >
+              <textarea
+                name="message"
+                rows="4"
+                class="w-full px-4 py-3 rounded-lg bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary focus:bg-white dark:focus:bg-slate-800 outline-none transition-all placeholder-slate-400"
+                placeholder="Size nasıl yardımcı olabilirim veya hangi konuda görüşmek istersiniz?"
+                required
+                data-i18n="contact_placeholder"
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              class="w-full bg-secondary dark:bg-primary text-white font-bold py-4 rounded-lg hover:bg-slate-800 dark:hover:bg-blue-700 transition-all transform hover:-translate-y-1 shadow-lg active:scale-95"
+            >
+              <span data-i18n="contact_submit">Mesajı Gönder</span> <i class="fa-solid fa-paper-plane ml-2"></i>
+            </button>
+          </form>
+        </div>
+
+        <div
+          data-aos="fade-up"
+          class="mt-12 flex flex-col md:flex-row justify-center items-center gap-8 text-slate-500 dark:text-slate-400 text-sm transition-colors"
+        >
+          <div class="flex items-center gap-2 group cursor-pointer">
+            <div
+              class="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/30 text-primary dark:text-blue-400 flex items-center justify-center group-hover:scale-110 transition-transform"
+            >
+              <i class="fa-solid fa-envelope"></i>
+            </div>
+            <span class="group-hover:text-primary transition-colors"
+              >suatalper2007@gmail.com</span
+            >
+          </div>
+          <!-- Ekstra: LinkedIn'i vurgula -->
+          <div class="flex items-center gap-2 group cursor-pointer">
+            <div
+              class="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/30 text-primary dark:text-blue-400 flex items-center justify-center group-hover:scale-110 transition-transform"
+            >
+              <i class="fa-brands fa-linkedin-in"></i>
+            </div>
+            <span class="group-hover:text-primary transition-colors"
+              >/in/suat-alper-çinsar</span
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer
+      class="bg-white dark:bg-slate-900 border-t border-gray-100 dark:border-slate-800 py-10 transition-colors duration-300"
+    >
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <a
+          href="#"
+          class="text-2xl font-bold text-secondary dark:text-white tracking-tight inline-block mb-4 transition-colors"
+        >
+          Suat Alper<span class="text-primary"> Çinsar</span>.
+        </a>
+        <p class="text-slate-400 text-sm mb-6" data-i18n="footer_text">
+          © 2026 Tüm hakları saklıdır. Bu web sitesi Suat Alper Çinsar
+          tarafından kodlanmıştır.
+        </p>
+        <div class="flex justify-center space-x-6">
+          <a
+            href="https://github.com/suatalper"
+            target="_blank"
+            class="text-slate-400 hover:text-primary dark:hover:text-blue-400 transition-colors transform hover:scale-110"
+            ><i class="fa-brands fa-github text-xl"></i
+          ></a>
+          <a
+            target="_blank"
+            href="https://www.linkedin.com/in/suat-alper-çinsar-3a0099304/"
+            class="hover:text-primary dark:hover:text-blue-400 transition-colors transform hover:scale-110"
+            title="LinkedIn Profilim"
+            ><i class="fa-brands fa-linkedin text-2xl"></i
+          ></a>
+          <a
+            target="_blank"
+            href="https://www.instagram.com/cinsarsuatalper/"
+            title="Instagram Hesabım"
+            class="hover:text-primary dark:hover:text-blue-400 transition-colors transform hover:scale-110"
+            ><i class="fa-brands fa-instagram text-2xl"></i
+          ></a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bildirim Kutusu (Toast) -->
+    <div
+      id="toast"
+      class="fixed top-5 right-5 bg-white dark:bg-slate-800 border border-green-100 dark:border-green-900 text-secondary dark:text-white px-6 py-4 rounded-xl shadow-2xl transform -translate-y-32 transition-transform duration-500 flex items-center gap-4 z-50"
+    >
+      <div
+        class="w-10 h-10 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-green-500 text-xl"
+      >
+        <i class="fa-solid fa-check"></i>
+      </div>
+      <div>
+        <h4 class="font-bold text-sm" data-i18n="toast_success">Mesaj Gönderildi!</h4>
+        <p class="text-xs text-slate-500 dark:text-slate-400" data-i18n="toast_desc">
+          En kısa sürede size döneceğim.
+        </p>
+      </div>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button
+      id="scroll-to-top"
+      class="fixed bottom-8 right-8 bg-primary/80 dark:bg-primary/90 text-white w-12 h-12 rounded-full hidden justify-center items-center shadow-lg hover:bg-primary transition-all duration-300 transform hover:-translate-y-1 focus:outline-none z-50"
+    >
+      <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- Theme Editor -->
+    <div class="fixed left-0 top-1/2 transform -translate-y-1/2 z-50">
+      <button
+        id="theme-toggle-btn"
+        onclick="document.getElementById('theme-panel').classList.toggle('-translate-x-full')"
+        class="bg-white dark:bg-slate-800 p-3 rounded-r-xl shadow-lg border border-l-0 border-gray-200 dark:border-slate-700 text-secondary dark:text-white hover:text-primary transition-all"
+      >
+        <i class="fa-solid fa-palette text-xl animate-spin-slow"></i>
+      </button>
+      <div
+        id="theme-panel"
+        class="absolute left-0 top-0 transform -translate-x-full -translate-y-1/2 bg-white dark:bg-slate-800 p-4 rounded-r-xl shadow-xl border border-l-0 border-gray-200 dark:border-slate-700 transition-transform duration-300 flex flex-col gap-3"
+        style="margin-top: 22px;"
+      >
+        <p class="text-xs font-bold text-slate-500 uppercase text-center mb-1">
+          Tema Rengi
+        </p>
+        <button
+          onclick="setThemeColor('#2563EB', '#60A5FA')"
+          class="w-8 h-8 rounded-full bg-blue-600 hover:scale-110 transition-transform ring-2 ring-offset-2 ring-transparent hover:ring-blue-600"
+          title="Mavi (Varsayılan)"
+        ></button>
+        <button
+          onclick="setThemeColor('#7C3AED', '#A78BFA')"
+          class="w-8 h-8 rounded-full bg-violet-600 hover:scale-110 transition-transform ring-2 ring-offset-2 ring-transparent hover:ring-violet-600"
+          title="Mor"
+        ></button>
+        <button
+          onclick="setThemeColor('#059669', '#34D399')"
+          class="w-8 h-8 rounded-full bg-emerald-600 hover:scale-110 transition-transform ring-2 ring-offset-2 ring-transparent hover:ring-emerald-600"
+          title="Zümrüt Yeşili"
+        ></button>
+        <button
+          onclick="setThemeColor('#DC2626', '#F87171')"
+          class="w-8 h-8 rounded-full bg-red-600 hover:scale-110 transition-transform ring-2 ring-offset-2 ring-transparent hover:ring-red-600"
+          title="Kırmızı"
+        ></button>
+        <button
+          onclick="setThemeColor('#DB2777', '#F472B6')"
+          class="w-8 h-8 rounded-full bg-pink-600 hover:scale-110 transition-transform ring-2 ring-offset-2 ring-transparent hover:ring-pink-600"
+          title="Pembe"
+        ></button>
+        
+        <!-- Kapat Butonu (Alt & Orta) -->
+        <button
+          onclick="document.getElementById('theme-panel').classList.add('-translate-x-full')"
+          class="text-slate-400 hover:text-red-500 transition-colors mx-auto mt-2"
+          title="Kapat"
+        >
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Destek Ol Pop-up -->
+    <div
+      id="popup-overlay"
+      class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden justify-center items-center p-4"
+    >
+      <div
+        id="popup-menu"
+        class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-2xl w-full max-w-md m-4 text-center transform transition-all"
+        data-aos="zoom-in-up"
+      >
+        <h3 class="text-2xl font-bold text-secondary dark:text-white mb-4" data-i18n="popup_title">
+          Desteğiniz benim için önemli!
+        </h3>
+        <p class="text-slate-500 dark:text-slate-400 mb-8" data-i18n="popup_desc">
+          Bu web sitesini ve projelerimi geliştirmeye devam etmem için bana bir
+          kahve ısmarlayarak destek olabilirsiniz. Her destek, daha fazla içerik
+          ve daha iyi projeler demek!
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <a
+            href="https://www.buymeacoffee.com/suatalper"
+            target="_blank"
+            class="w-full sm:w-auto px-6 py-3 rounded-full bg-yellow-400 text-slate-800 font-bold hover:bg-yellow-500 transition-colors transform hover:scale-105 flex items-center justify-center"
+          >
+            <i class="fa-solid fa-mug-hot mr-2"></i> <span data-i18n="popup_btn_coffee">Bana bir kahve ısmarla!</span>
+          </a>
+          <button
+            id="close-popup"
+            class="w-full sm:w-auto px-6 py-3 rounded-full bg-slate-200 dark:bg-slate-700 text-secondary dark:text-white font-bold hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"
+            data-i18n="popup_btn_later"
+          >
+            Belki daha sonra
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- AOS JS Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="snow.js"></script>
+    <script src="translations.js"></script>
+    <script>
+      // --- THEME EDITOR LOGIC ---
+      function setThemeColor(primary, lightPrimary) {
+        document.documentElement.style.setProperty("--color-primary", primary);
+        // We can use the same color or a variation for dark mode if needed,
+        // but for now let's restart animations or just keep it simple.
+        // Tailwind handles opacity variations automatically via text-primary/50 etc if we configured it right,
+        // but since we used direct var string in config, we might lose opacity utilities unless we use rgb vars.
+        // For this simple implementation, we update the main variable.
+        localStorage.setItem("theme-color", primary);
+      }
+
+      // Load saved theme
+      const savedTheme = localStorage.getItem("theme-color");
+      if (savedTheme) {
+        setThemeColor(savedTheme);
+      }
+
+      // --- LANGUAGE LOGIC ---
+      let currentLang = localStorage.getItem("lang") || "tr";
+
+      function toggleLanguage() {
+        currentLang = currentLang === "tr" ? "en" : "tr";
+        localStorage.setItem("lang", currentLang);
+        updateLanguage();
+      }
+
+      function updateLanguage() {
+        // Update Toggle Button Visuals
+        const flag = currentLang === "tr" ? "tr" : "gb";
+        const text = currentLang === "tr" ? "TR" : "EN";
+        
+        document.getElementById("lang-flag").src = `https://flagcdn.com/w20/${flag}.png`;
+        document.getElementById("lang-text").textContent = text;
+        document.getElementById("lang-flag-mobile").src = `https://flagcdn.com/w20/${flag}.png`;
+        document.getElementById("lang-text-mobile").textContent = text;
+
+        // Update Text Content
+        const elements = document.querySelectorAll("[data-i18n]");
+        elements.forEach((el) => {
+          const key = el.getAttribute("data-i18n");
+          if (translations[currentLang][key]) {
+            if (el.tagName === "INPUT" || el.tagName === "TEXTAREA") {
+              el.placeholder = translations[currentLang][key];
+            } else {
+              el.textContent = translations[currentLang][key];
+            }
+          }
+        });
+        
+        // Update Options in Select
+        const selectOptions = document.querySelectorAll("select[name='subject'] option");
+        if(selectOptions.length > 0 && currentLang === 'en') {
+             // Simple index based mapping for options since they don't have easy selectors
+             const subjects = ['Freelance Project', 'Internship / Job Opportunity', 'Meeting', 'Other'];
+             selectOptions.forEach((opt, idx) => opt.textContent = subjects[idx]);
+        } else if (selectOptions.length > 0 && currentLang === 'tr') {
+             const subjects = ['Freelance Proje İşi', 'Staj / İş Fırsatı', 'Tanışma', 'Diğer'];
+             selectOptions.forEach((opt, idx) => opt.textContent = subjects[idx]);
+        }
+      }
+
+      // Init Language
+      updateLanguage();
+
+      // AOS Init
+      AOS.init({
+        once: true, // Animasyonlar sadece bir kere oynasın
+        offset: 50, // Tetiklenme mesafesi
+        duration: 800, // Animasyon süresi
+        easing: "ease-out-cubic",
+      });
+
+      // --- LET IT SNOW ---
+      const snowBtns = [
+        document.getElementById("snow-btn"),
+        document.getElementById("snow-btn-mobile"),
+      ];
+      let isSnowing = false;
+
+      const toggleSnow = () => {
+        if (isSnowing) {
+          stopSnowing();
+          isSnowing = false;
+        } else {
+          startSnowing();
+          isSnowing = true;
+        }
+      };
+
+      snowBtns.forEach((btn) => {
+        if (btn) {
+          btn.addEventListener("click", toggleSnow);
+        }
+      });
+
+      // --- DAKTİLO EFEKTİ (TYPEWRITER) ---
+      const typewriterElement = document.getElementById("typewriter-text");
+      const words = [
+        "Öğrenci",
+        "Web Geliştirici",
+        "Freelancer",
+        "Teknoloji Tutkunu",
+      ];
+      let wordIndex = 0;
+      let charIndex = 0;
+      let isDeleting = false;
+      let typeSpeed = 100;
+
+      function type() {
+        const currentWord = words[wordIndex];
+
+        if (isDeleting) {
+          typewriterElement.textContent = currentWord.substring(
+            0,
+            charIndex - 1
+          );
+          charIndex--;
+          typeSpeed = 50; // Silme hızı daha hızlı
+        } else {
+          typewriterElement.textContent = currentWord.substring(
+            0,
+            charIndex + 1
+          );
+          charIndex++;
+          typeSpeed = 100; // Yazma hızı
+        }
+
+        if (!isDeleting && charIndex === currentWord.length) {
+          // Kelime tamamlandı, bekle ve silmeye başla
+          isDeleting = true;
+          typeSpeed = 2000; // Tamamlandığında bekleme süresi
+        } else if (isDeleting && charIndex === 0) {
+          // Silme tamamlandı, sonraki kelimeye geç
+          isDeleting = false;
+          wordIndex++;
+          if (wordIndex === words.length) {
+            wordIndex = 0;
+          }
+          typeSpeed = 500; // Yeni kelimeye başlamadan önce bekleme
+        }
+
+        setTimeout(type, typeSpeed);
+      }
+
+      // Animasyonu başlat
+      document.addEventListener("DOMContentLoaded", type);
+
+      // --- MOBİL MENÜ MANTIĞI ---
+      const menuBtn = document.getElementById("mobile-menu-btn");
+      const menu = document.getElementById("mobile-menu");
+      const icon = menuBtn.querySelector("i");
+
+      menuBtn.addEventListener("click", () => {
+        menu.classList.toggle("hidden");
+        if (menu.classList.contains("hidden")) {
+          icon.classList.remove("fa-xmark");
+          icon.classList.add("fa-bars");
+        } else {
+          icon.classList.remove("fa-bars");
+          icon.classList.add("fa-xmark");
+        }
+      });
+
+      // Menü linklerine tıklandığında menüyü kapat
+      menu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          menu.classList.add("hidden");
+          icon.classList.remove("fa-xmark");
+          icon.classList.add("fa-bars");
+        });
+      });
+
+      // Form Gönderim Simülasyonu
+      const form = document.querySelector("form");
+
+      async function handleSubmit(event) {
+        event.preventDefault();
+        const data = new FormData(event.target);
+
+        fetch(event.target.action, {
+          method: form.method,
+          body: data,
+          headers: {
+            Accept: "application/json",
+          },
+        })
+          .then((response) => {
+            if (response.ok) {
+              showSuccessMessage();
+              form.reset();
+            } else {
+              response.json().then((data) => {
+                if (Object.hasOwn(data, "errors")) {
+                  alert(
+                    data["errors"].map((error) => error["message"]).join(", ")
+                  );
+                } else {
+                  alert("Mesaj gönderilirken bir hata oluştu.");
+                }
+              });
+            }
+          })
+          .catch((error) => {
+            alert("Mesaj gönderilirken bir hata oluştu.");
+          });
+      }
+      form.addEventListener("submit", handleSubmit);
+      function showSuccessMessage() {
+        const toast = document.getElementById("toast");
+        // Bildirimi göster
+        toast.classList.remove("-translate-y-32");
+
+        // 3 saniye sonra geri gizle
+        setTimeout(() => {
+          toast.classList.add("-translate-y-32");
+        }, 3000);
+      }
+
+      // --- STATS COUNTER & GITHUB STATS ---
+      document.addEventListener("DOMContentLoaded", () => {
+        const statsSection = document.getElementById("stats-section");
+        if (!statsSection) return;
+
+        const animateCount = (el, target, duration = 2000) => {
+          let start = 0;
+          const initialHTML = el.innerHTML;
+          const prefix = initialHTML.includes("%") ? "%" : "";
+          const suffix = initialHTML.includes("+") ? "+" : "";
+
+          const step = (timestamp) => {
+            if (!start) start = timestamp;
+            const progress = timestamp - start;
+            let current = Math.floor(target * (progress / duration));
+            current = Math.min(current, target); // Ensure it doesn't exceed target
+
+            el.innerHTML = `${prefix}${current}${suffix}`;
+
+            if (progress < duration) {
+              window.requestAnimationFrame(step);
+            } else {
+              el.innerHTML = `${prefix}${target}${suffix}`;
+            }
+          };
+          window.requestAnimationFrame(step);
+        };
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                // Animate static counters
+                const staticCounters = [
+                  document.getElementById("years-of-code"),
+                  document.getElementById("learning-motivation"),
+                ];
+                staticCounters.forEach((counter) => {
+                  if (counter) {
+                    const target = parseInt(
+                      counter.getAttribute("data-target")
+                    );
+                    animateCount(counter, target);
+                  }
+                });
+
+                // Fetch and animate GitHub stats (Repositories)
+                const personalProjectsEl = document.getElementById("personal-projects");
+                if (personalProjectsEl) {
+                   const username = "suatalper";
+                   fetch(`https://api.github.com/users/${username}`)
+                    .then((response) => 
+                      response.ok ? response.json() : Promise.reject("API error")
+                    )
+                    .then((data) => {
+                       if (data && typeof data.public_repos !== 'undefined') {
+                         animateCount(personalProjectsEl, data.public_repos);
+                       } else {
+                         animateCount(personalProjectsEl, parseInt(personalProjectsEl.getAttribute("data-target")));
+                       }
+                    })
+                    .catch(() => {
+                       animateCount(personalProjectsEl, parseInt(personalProjectsEl.getAttribute("data-target")));
+                    });
+                }
+                
+                // Fetch and animate GitHub stats
+                const githubStatsEl = document.getElementById("github-stats");
+                if (githubStatsEl) {
+                  const username = "suatalper";
+                  fetch(
+                    `https://github-contributions-api.jogruber.de/v4/${username}`
+                  )
+                    .then((response) =>
+                      response.ok
+                        ? response.json()
+                        : Promise.reject("API error")
+                    )
+                    .then((data) => {
+                      if (data && data.total) {
+                        const totalContributions = Object.values(
+                          data.total
+                        ).reduce((a, b) => a + b, 0);
+                        animateCount(githubStatsEl, totalContributions);
+                      } else {
+                        animateCount(
+                          githubStatsEl,
+                          parseInt(githubStatsEl.getAttribute("data-target"))
+                        );
+                      }
+                    })
+                    .catch(() => {
+                      animateCount(
+                        githubStatsEl,
+                        parseInt(githubStatsEl.getAttribute("data-target"))
+                      );
+                    });
+                }
+                observer.unobserve(statsSection);
+              }
+            });
+          },
+          { threshold: 0.2 }
+        );
+
+        observer.observe(statsSection);
+      });
+
+      // --- KOD EDİTÖRÜ DAKTİLO EFEKTİ ---
+      const codeEditor = document.getElementById("code-editor");
+      const codeLines = [
+        {
+          text: "#include <stdio.h>",
+          color: "purple",
+          indent: 0,
+          delayAfter: 200,
+        },
+        { text: "", indent: 0, delayAfter: 100 },
+        { text: "int main() {", color: "purple", indent: 0, delayAfter: 200 },
+        {
+          text: "// Geleceği kodluyorum...",
+          color: "slate",
+          indent: 1,
+          delayAfter: 300,
+        },
+        {
+          text: 'char *hedef = "Full Stack Developer";',
+          color: "green",
+          indent: 1,
+          delayAfter: 200,
+        },
+        {
+          text: "int motivasyon = 100;",
+          color: "amber",
+          indent: 1,
+          delayAfter: 200,
+        },
+        { text: "", indent: 0, delayAfter: 100 },
+        {
+          text: "while (motivasyon > 0) {",
+          color: "blue",
+          indent: 1,
+          delayAfter: 200,
+        },
+        {
+          text: 'learn("Yeni Teknolojiler");',
+          color: "green",
+          indent: 2,
+          delayAfter: 150,
+        },
+        {
+          text: 'build("Projeler");',
+          color: "green",
+          indent: 2,
+          delayAfter: 150,
+        },
+        { text: "}", indent: 1, delayAfter: 200 },
+        { text: "", indent: 0, delayAfter: 100 },
+        { text: "return 0;", color: "purple", indent: 1, delayAfter: 200 },
+        { text: "}", indent: 0, delayAfter: 500 },
+      ];
+
+      let lineIndex = 0;
+
+      function typeCode() {
+        if (lineIndex >= codeLines.length) {
+          // Animasyon bitti, imleci göster
+          const cursor = document.createElement("div");
+          cursor.className =
+            "mt-2 w-2.5 h-5 bg-blue-500 animate-pulse inline-block align-middle";
+          codeEditor.appendChild(cursor);
+          return;
+        }
+
+        const line = codeLines[lineIndex];
+        const lineEl = document.createElement("div");
+        lineEl.style.paddingLeft = `${line.indent * 1.5}rem`;
+        codeEditor.appendChild(lineEl);
+
+        let charIndex = 0;
+        function typeChar() {
+          if (charIndex < line.text.length) {
+            const char = line.text.charAt(charIndex);
+            const span = document.createElement("span");
+
+            // Renk belirleme
+            if (line.color === "purple") {
+              span.className = "text-purple-400";
+            } else if (line.color === "green") {
+              span.className = "text-green-400";
+            } else if (line.color === "amber") {
+              span.className = "text-amber-400";
+            } else if (line.color === "blue") {
+              span.className = "text-blue-400";
+            } else if (line.color === "slate") {
+              span.className = "text-slate-500 italic";
+            } else {
+              span.className = "text-slate-300";
+            }
+
+            span.textContent = char;
+            lineEl.appendChild(span);
+            charIndex++;
+            setTimeout(typeChar, 15); // Karakter yazma hızı düşürüldü
+          } else {
+            lineIndex++;
+            setTimeout(typeCode, line.delayAfter);
+          }
+        }
+        typeChar();
+      }
+
+      document.addEventListener("DOMContentLoaded", typeCode);
+
+      // --- SCROLL TO TOP BUTTON ---
+      const scrollToTopBtn = document.getElementById("scroll-to-top");
+
+      window.addEventListener("scroll", () => {
+        if (window.pageYOffset > 300) {
+          scrollToTopBtn.classList.remove("hidden");
+          scrollToTopBtn.classList.add("flex");
+        } else {
+          scrollToTopBtn.classList.add("hidden");
+          scrollToTopBtn.classList.remove("flex");
+        }
+      });
+
+      scrollToTopBtn.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      });
+
+      // --- DESTEK OL POP-UP ---
+      document.addEventListener("DOMContentLoaded", () => {
+        const popupOverlay = document.getElementById("popup-overlay");
+        const closePopupButton = document.getElementById("close-popup");
+
+        if (!popupOverlay || !closePopupButton) return;
+
+        // Show the popup if it hasn't been shown before
+        if (!localStorage.getItem("popupShown")) {
+          // We will show it with a small delay to not be too intrusive
+          setTimeout(() => {
+            popupOverlay.classList.remove("hidden");
+            popupOverlay.classList.add("flex");
+            // Trigger AOS animation
+            AOS.refresh();
+          }, 2500); // 2.5-second delay
+        }
+
+        const closePopup = () => {
+          popupOverlay.classList.add("hidden");
+          popupOverlay.classList.remove("flex");
+          // Remember that the popup has been shown
+          localStorage.setItem("popupShown", "true");
+        };
+
+        // Close the popup
+        closePopupButton.addEventListener("click", closePopup);
+
+        // Also close if the user clicks on the overlay
+        popupOverlay.addEventListener("click", (event) => {
+          if (event.target === popupOverlay) {
+            closePopup();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

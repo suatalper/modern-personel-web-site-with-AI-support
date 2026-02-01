@@ -1,0 +1,23 @@
+{
+  "name": "modern-personel-web-site-with-ai-support",
+  "version": "1.0.0",
+  "description": "Modern, duyarlı (responsive) ve interaktif kişisel portfolyo web sitesi. Bu proje, yeteneklerimi, projelerimi ve iletişim bilgilerimi sergilemek amacıyla geliştirilmiştir.",
+  "main": "snow.js",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "bugs": {
+    "url": "https://github.com/suatalper/modern-personel-web-site-with-AI-support/issues"
+  },
+  "homepage": "https://github.com/suatalper/modern-personel-web-site-with-AI-support#readme",
+  "dependencies": {
+    "@astrojs/tailwind": "^6.0.2",
+    "aos": "^2.3.4",
+    "astro": "^5.17.1",
+    "tailwindcss": "^3.4.19"
+  }
+}
