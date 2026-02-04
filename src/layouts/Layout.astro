@@ -10,7 +10,7 @@
         
         <!-- Google Fonts -->
         <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
           rel="stylesheet"
         />
         <!-- Font Awesome Icons -->
@@ -29,7 +29,7 @@
             }
         </script>
 	</head>
-	<body class="font-sans text-slate-600 dark:text-slate-300 antialiased bg-white dark:bg-slate-900 overflow-x-hidden">
+	<body class="font-sans text-slate-300 antialiased bg-slate-900 overflow-x-hidden selection:bg-teal-500/30 selection:text-teal-200">
 		<slot />
         
         <!-- Local Scripts if needed, but Index handles logic now -->
@@ -42,16 +42,16 @@
 <style is:global>
     /* Yumuşak geçişler için */
     :root {
-    --color-primary: #2563eb;
+    --color-primary: #2dd4bf;
     --color-secondary: #0f172a;
-    --color-accent: #f59e0b;
+    --color-accent: #2dd4bf;
     }
     body {
     transition: background-color 0.5s ease, color 0.5s ease;
     }
 
     .hero-gradient {
-    background: linear-gradient(to right bottom, #eff6ff, #ffffff);
+    background: linear-gradient(to right bottom, #0f172a, #1e293b);
     }
     .dark .hero-gradient {
     background: linear-gradient(to right bottom, #0f172a, #1e293b);
@@ -59,18 +59,20 @@
 
     /* Animasyonlu Text Gradyan */
     .text-gradient {
-    background: linear-gradient(to right, #2563eb, #9333ea, #2563eb);
+    background: linear-gradient(to right, #2dd4bf, #f0fdf4, #2dd4bf);
     background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: gradientMove 3s linear infinite;
+    text-shadow: 0 0 20px rgba(45, 212, 191, 0.3);
     }
     .dark .text-gradient {
-    background: linear-gradient(to right, #60a5fa, #c084fc, #60a5fa);
+    background: linear-gradient(to right, #2dd4bf, #f0fdf4, #2dd4bf);
     background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: gradientMove 3s linear infinite;
+    text-shadow: 0 0 20px rgba(45, 212, 191, 0.3);
     }
 
     @keyframes gradientMove {
@@ -88,14 +90,15 @@
     width: 10px;
     }
     ::-webkit-scrollbar-track {
-    background: #1e293b;
+    background: #0f172a;
     }
     ::-webkit-scrollbar-thumb {
-    background: #2563eb;
+    background: #1e293b;
+    border: 1px solid #334155;
     border-radius: 5px;
     }
     ::-webkit-scrollbar-thumb:hover {
-    background: #1d4ed8;
+    background: #2dd4bf;
     }
 
     .snowflake {
